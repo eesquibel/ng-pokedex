@@ -33,7 +33,7 @@ export class PokemonService {
   }
 
   private filter(pokemon: Pokemon[], value: string) {
-    return pokemon.filter(p => value ? p.name.toLowerCase().includes(value.toLowerCase()) : pokemon);
+    return pokemon.filter(p => value ? p.name.includes(value.toLowerCase()) : pokemon);
   }
 
 }
