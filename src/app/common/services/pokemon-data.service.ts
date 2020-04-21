@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
 import { Pokemon } from './../interfaces/pokemon';
@@ -9,7 +9,9 @@ import { Pokemon } from './../interfaces/pokemon';
   providedIn: 'root'
 })
 export class PokemonDataService {
-  pokemon: Observable<Pokemon[]>;
+
+  public pokemon: Observable<Pokemon[]>;
+
   constructor(private http: HttpClient) {
     this.pokemon = this.http.get<Pokemon[]>('/api/pokemon.json').pipe(
       map(pokemon => pokemon.map(p => this.setPokemon(p))),
@@ -35,4 +37,5 @@ export class PokemonDataService {
     pokemon.name = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
     return pokemon;
   }
+
 }
