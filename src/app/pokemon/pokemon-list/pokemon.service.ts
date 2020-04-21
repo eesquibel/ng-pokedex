@@ -8,6 +8,7 @@ import { PokemonDataService } from '../../common/services/pokemon-data.service';
 
 @Injectable()
 export class PokemonService {
+
   readonly pokemon: Observable<Pokemon[]>;
   private searchTerm = new Subject<string>();
 
@@ -23,15 +24,16 @@ export class PokemonService {
     );
   }
 
-  setTitle() {
+  public setTitle() {
     this.title.setTitle('Search for Pokémon');
   }
 
-  search(term: string) {
+  public search(term: string) {
     this.searchTerm.next(term);
   }
 
   private filter(pokemon: Pokemon[], value: string) {
     return pokemon.filter(p => value ? p.name.toLowerCase().includes(value.toLowerCase()) : pokemon);
   }
+
 }

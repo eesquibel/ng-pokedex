@@ -11,18 +11,20 @@ import { PokemonService } from './pokemon.service';
   providers: [PokemonService]
 })
 export class PokemonListComponent implements OnInit {
-  pokemon: Observable<Pokemon[]>;
-  showGrid = true;
+
+  public pokemon: Observable<Pokemon[]>;
+  public showGrid = true;
 
   constructor(
     private pokemonService: PokemonService) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.pokemonService.setTitle();
     this.pokemon = this.pokemonService.pokemon;
   }
 
-  search(term: string) {
+  public search(term: string) {
     this.pokemonService.search(term);
   }
+
 }

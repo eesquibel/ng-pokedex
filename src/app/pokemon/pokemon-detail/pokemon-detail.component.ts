@@ -18,16 +18,18 @@ export enum MODAL_KEYS {
   styleUrls: ['./pokemon-detail.component.scss']
 })
 export class PokemonDetailComponent implements OnInit, OnDestroy {
-  pokemon: Observable<Pokemon>;
-  show = true;
+
+  public pokemon: Observable<Pokemon>;
+  public show = true;
 
   constructor(
     private title: Title,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private pokemonDataService: PokemonDataService) { }
+    private pokemonDataService: PokemonDataService) {
+  }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.pokemon = this.activatedRoute.params
       .pipe(
         distinctUntilChanged(),
@@ -36,18 +38,18 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
       );
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.title.setTitle('Search for Pokémon');
   }
 
-  close(show: boolean) {
+  public close(show: boolean) {
     if (!show) {
       this.router.navigateByUrl('/pokemon');
     }
   }
 
   @HostListener('window:keyup', ['$event'])
-  keyEvent(event) {
+  public keyEvent(event: KeyboardEvent) {
     if (event.keyCode === MODAL_KEYS.RIGHT_ARROW) {
       const paramId = +this.activatedRoute.snapshot.params.id;
       const id = paramId === 1 ? 151 : paramId - 1;

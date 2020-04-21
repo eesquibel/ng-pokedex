@@ -7,5 +7,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-  navOpen = false;
+
+  public navOpen = false;
+
 }

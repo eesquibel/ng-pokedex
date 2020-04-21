@@ -6,9 +6,12 @@ import { Component, OnInit, HostListener } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  navOpen = false;
+
+  public navOpen = false;
+
   constructor() { }
 
-  ngOnInit() {
+  public ngOnInit() {
   }
+
 }

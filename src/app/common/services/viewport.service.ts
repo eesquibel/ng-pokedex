@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class ViewportService {
   constructor() { }
 
-  lockScroll() {
+  public lockScroll() {
     // Temp until I can figure out the native renderer
     if (document) {
       const scrollDiv = document.createElement('div');
@@ -19,7 +19,7 @@ export class ViewportService {
     }
   }
 
-  unlockScroll() {
+  public unlockScroll() {
     if (document) {
       document.body.style.overflow = 'initial';
       document.body.style.paddingRight = '0px';

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, OnDestroy, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { SubSink } from 'subsink';
 
 @Component({
   selector: 'app-form-search',
@@ -8,23 +8,25 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./form-search.component.scss']
 })
 export class FormSearchComponent implements OnInit, OnDestroy {
-  @Output() formChange = new EventEmitter<string>();
-  searchForm: FormGroup;
-  subscriptions: Subscription[];
+
+  @Output()
+  public formChange = new EventEmitter<string>();
+
+  public searchForm: FormGroup;
+
+  private subsink: SubSink = new SubSink();
 
   constructor(private formBuilder: FormBuilder) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.searchForm = this.formBuilder.group({
       search: ['']
     });
 
-    this.subscriptions = [
-      this.searchForm.controls.search.valueChanges.subscribe(value => this.formChange.emit(value))
-    ];
+    this.subsink.sink = this.searchForm.controls.search.valueChanges.subscribe(value => this.formChange.emit(value));
   }
 
-  ngOnDestroy() {
-    this.subscriptions.forEach(s => s.unsubscribe());
+  public ngOnDestroy() {
+    this.subsink.unsubscribe();
   }
 }
